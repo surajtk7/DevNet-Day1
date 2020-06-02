@@ -1,0 +1,106 @@
+$ git show
+commit 9259885c1ad3cf194ae2af71f85912467b3002a6 (HEAD -> master)
+Author: surtikoo <surtikoo@cisco.com>
+Date:   Tue Jun 2 22:44:17 2020 +0530
+
+    Converted json to xml and yaml files
+
+diff --git a/sample.json b/sample.json
+new file mode 100644
+index 0000000..0d0f69a
+--- /dev/null
++++ b/sample.json
+@@ -0,0 +1 @@
++{"data": {"country": [{"@name": "Liechtenstein", "rank": "1", "year": "2008", "gdppc": "141100", "neighbor": [{"@name": "Austria", "@direction": "E"}, {"@name": "Switzerland", "@direction": "W"}]}, {"@name": "Singapore", "rank": "4", "year": "2011", "gdppc": "59900", "neighbor": {"@name": "Malaysia", "@direction": "N"}}, {"@name": "Panama", "rank": "68", "year": "2011", "gdppc": "13600", "neighbor": [{"@name": "Costa Rica", "@direction": "W"}, {"@name": "Colombia", "@direction": "E"}]}]}}
+\ No newline at end of file
+diff --git a/sample.xml b/sample.xml
+new file mode 100644
+index 0000000..5ec3526
+:...skipping...
+commit 9259885c1ad3cf194ae2af71f85912467b3002a6 (HEAD -> master)
+Author: surtikoo <surtikoo@cisco.com>
+Date:   Tue Jun 2 22:44:17 2020 +0530
+
+    Converted json to xml and yaml files
+
+diff --git a/sample.json b/sample.json
+new file mode 100644
+index 0000000..0d0f69a
+--- /dev/null
++++ b/sample.json
+@@ -0,0 +1 @@
++{"data": {"country": [{"@name": "Liechtenstein", "rank": "1", "year": "2008", "gdppc": "141100", "neighbor": [{"@name": "Austria", "@direction": "E"}, {"@name": "Switzerland", "@direction": "W"}]}, {"@name": "Singapore", "rank": "4", "year": "2011", "gdppc": "59900", "neighbor": {"@name": "Malaysia", "@direction": "N"}}, {"@name": "Panama", "rank": "68", "year": "2011", "gdppc": "13600", "neighbor": [{"@name": "Costa Rica", "@direction": "W"}, {"@name": "Colombia", "@direction": "E"}]}]}}
+\ No newline at end of file
+diff --git a/sample.xml b/sample.xml
+new file mode 100644
+index 0000000..5ec3526
+--- /dev/null
++++ b/sample.xml
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<data><country name="Liechtenstein"><rank>1</rank><year>2008</year><gdppc>141100</gdppc><neighbor name="Austria" direction="E"></neighbor><neighbor name="Switzerland" direction="W"></neighbor></country><country name="Singapore"><rank>4</rank><year>2011</year><gdppc>59900</gdppc><neighbor name="Malaysia" direction="N"></neighbor></country><country name="Panama"><rank>68</rank><year>2011</year><gdppc>13600</gdppc><neighbor name="Costa Rica" direction="W"></neighbor><neighbor name="Colombia" direction="E"></neighbor></country></data>
+\ No newline at end of file
+diff --git a/sample.yaml b/sample.yaml
+new file mode 100644
+index 0000000..136849a
+--- /dev/null
++++ b/sample.yaml
+@@ -0,0 +1,27 @@
++data:
++  country:
++  - '@name': Liechtenstein
++    gdppc: '141100'
++    neighbor:
++    - '@direction': E
++      '@name': Austria
++    - '@direction': W
++      '@name': Switzerland
++    rank: '1'
++    year: '2008'
++  - '@name': Singapore
++    gdppc: '59900'
++    neighbor:
++      '@direction': N
++      '@name': Malaysia
++    rank: '4'
++    year: '2011'
++  - '@name': Panama
++    gdppc: '13600'
++    neighbor:
++    - '@direction': W
++      '@name': Costa Rica
++    - '@direction': E
++      '@name': Colombia
++    rank: '68'
++    year: '2011'
+diff --git a/script.py b/script.py
+new file mode 100644
+index 0000000..0781c8d
+--- /dev/null
++++ b/script.py
+@@ -0,0 +1,18 @@
++import json
++import yaml
++import xmltodict
++
++with open("sample.json",'r') as file1:
++    pydata=json.load(file1)
++
++with open("sample.yaml",'w') as file2:
++    ydata=yaml.dump(pydata,file2)
++
++with open("sample.xml",'w') as file3:
++    file3.write(xmltodict.unparse(pydata))
++
++
++
++
++
++
+(END)
+$ git log
+commit 9259885c1ad3cf194ae2af71f85912467b3002a6 (HEAD -> master, origin/master)
+Author: surtikoo <surtikoo@cisco.com>
+Date:   Tue Jun 2 22:44:17 2020 +0530
+
+    Converted json to xml and yaml files
